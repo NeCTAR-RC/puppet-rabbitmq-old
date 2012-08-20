@@ -22,4 +22,8 @@ class rabbitmq {
     require => Package['rabbitmq-server'],
   }
 
+  File <| tag == 'sslcert' |> {
+    notify +> Service['rabbitmq-server'],
+  }
+
 }
