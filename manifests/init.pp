@@ -4,6 +4,11 @@ class rabbitmq {
     ensure => present,
   }
 
+  user { 'rabbitmq':
+    groups  => $ssl_group,
+    require => Package['rabbitmq'],
+  }
+
   service { 'rabbitmq-server':
     ensure  => running,
     enable  => true,
