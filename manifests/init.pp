@@ -6,7 +6,7 @@ class rabbitmq {
 
   user { 'rabbitmq':
     groups  => $ssl_group,
-    require => Package['rabbitmq'],
+    require => Package['rabbitmq-server'],
   }
 
   service { 'rabbitmq-server':
