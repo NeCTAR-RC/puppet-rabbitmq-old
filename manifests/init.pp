@@ -5,7 +5,7 @@ class rabbitmq {
   }
 
   user { 'rabbitmq':
-    groups  => $ssl_group,
+    groups  => $::ssl_group,
     require => Package['rabbitmq-server'],
   }
 
@@ -19,10 +19,10 @@ class rabbitmq {
     ensure  => directory,
     require => Package['rabbitmq-server'],
   }
-  
+
   file {'/etc/rabbitmq/rabbitmq.config':
     ensure  => present,
-    content => template("rabbitmq/rabbitmq.config.erb"),
+    content => template('rabbitmq/rabbitmq.config.erb'),
     notify  => Service['rabbitmq-server'],
     require => Package['rabbitmq-server'],
   }
