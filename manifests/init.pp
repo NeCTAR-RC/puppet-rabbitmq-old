@@ -31,4 +31,38 @@ class rabbitmq {
     notify +> Service['rabbitmq-server'],
   }
 
+  exec {'/usr/lib/rabbitmq/bin/rabbitmq-plugins enable rabbitmq_management':
+    unless => '/bin/grep rabbitmq_management /etc/rabbitmq/enabled_plugins',
+    notify => Service['rabbitmq-server'];
+  }
+
+  nagios::nrpe::service {
+    'rabbitmq_overview':
+      servicegroups => 'message-queues',
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${::fqdn} -c -1,1,-1 -u ${::nagios_rabbit_user} -p ${::nagios_rabbit_pass}";
+    'rabbitmq_aliveness':
+      servicegroups => 'message-queues',
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${::fqdn} -u ${::nagios_rabbit_user} -p ${::nagios_rabbit_pass}";
+  }
+
+  package { ['libnagios-plugin-perl', 'libwww-perl', 'libjson-perl']:
+    ensure => installed;
+  }
+
+  file {
+    '/usr/local/lib/nagios/plugins/check_rabbitmq_overview':
+      ensure  => file,
+      owner   => root,
+      group   => root,
+      mode    => '0755',
+      source  => 'puppet:///modules/rabbitmq/check_rabbitmq_overview',
+      require => File['/usr/local/lib/nagios/plugins'];
+    '/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness':
+      ensure  => file,
+      owner   => root,
+      group   => root,
+      mode    => '0755',
+      source  => 'puppet:///modules/rabbitmq/check_rabbitmq_aliveness',
+      require => File['/usr/local/lib/nagios/plugins'];
+  }
 }
