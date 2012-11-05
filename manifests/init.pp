@@ -32,8 +32,9 @@ class rabbitmq {
   }
 
   exec {'/usr/lib/rabbitmq/bin/rabbitmq-plugins enable rabbitmq_management':
-    unless => '/bin/grep rabbitmq_management /etc/rabbitmq/enabled_plugins',
-    notify => Service['rabbitmq-server'];
+    unless  => '/bin/grep rabbitmq_management /etc/rabbitmq/enabled_plugins',
+    notify  => Service['rabbitmq-server'],
+    require => Package['rabbitmq-server'],
   }
 
   nagios::nrpe::service {
