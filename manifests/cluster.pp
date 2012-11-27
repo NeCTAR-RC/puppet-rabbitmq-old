@@ -12,5 +12,15 @@ class rabbitmq::cluster inherits rabbitmq {
     notify => Service['rabbitmq-server'],
     require => Package['rabbitmq-server'],
   }
+
+  file {'/var/lib/rabbitmq/.erlang.cookie':
+    ensure  => present,
+    owner   => rabbitmq,
+    group   => rabbitmq,
+    mode    => '0400',
+    content => $rabbit_cookie,
+    notify  => Service['rabbitmq-server'],
+    require => Package['rabbitmq-server'],
+  }
   
 }
