@@ -15,7 +15,7 @@ class rabbitmq {
     require => Package['rabbitmq-server'],
   }
 
-  file {'/etc/rabbitmq/ssl':
+  file {['/etc/rabbitmq/ssl', '/etc/rabbitmq/rabbitmq.conf.d']:
     ensure  => directory,
     require => Package['rabbitmq-server'],
   }
@@ -40,10 +40,10 @@ class rabbitmq {
   nagios::nrpe::service {
     'rabbitmq_overview':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${::fqdn} -c -1,1,-1 -u ${::nagios_rabbit_user} -p ${::nagios_rabbit_pass}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} -c -1,1,-1 -u ${nagios_rabbit_user} -p ${nagios_rabbit_pass}";
     'rabbitmq_aliveness':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${::fqdn} -u ${::nagios_rabbit_user} -p ${::nagios_rabbit_pass}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${fqdn} -u ${nagios_rabbit_user} -p ${nagios_rabbit_pass}";
   }
 
   package { ['libnagios-plugin-perl', 'libwww-perl', 'libjson-perl']:
