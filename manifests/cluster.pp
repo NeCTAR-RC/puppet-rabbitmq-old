@@ -1,4 +1,4 @@
-class rabbitmq::cluster inherits rabbitmq {
+class rabbitmq::cluster($cookie, $nodes) inherits rabbitmq {
 
   File['/etc/rabbitmq/rabbitmq.config'] {
     content => template('rabbitmq/rabbitmq-cluster.config.erb'),
@@ -18,7 +18,7 @@ class rabbitmq::cluster inherits rabbitmq {
     owner   => rabbitmq,
     group   => rabbitmq,
     mode    => '0400',
-    content => $rabbit_cookie,
+    content => $cookie,
     notify  => Service['rabbitmq-server'],
     require => Package['rabbitmq-server'],
   }
