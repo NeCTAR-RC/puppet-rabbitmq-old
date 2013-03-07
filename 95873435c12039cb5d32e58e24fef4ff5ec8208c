@@ -1,0 +1,8 @@
+Change-Id: I95873435c12039cb5d32e58e24fef4ff5ec8208c
+Code-Review+2: Sam Morrison <sam.morrison@unimelb.edu.au>
+Verified+1: Jenkins <rc-melbourne@nectar.org.au>
+Submitted-by: Sam Morrison <sam.morrison@unimelb.edu.au>
+Submitted-at: Thu, 07 Mar 2013 13:31:18 +1100
+Reviewed-on: https://review.rc.nectar.org.au/191
+Project: NeCTAR-RC/puppet-rabbitmq
+Branch: refs/heads/production

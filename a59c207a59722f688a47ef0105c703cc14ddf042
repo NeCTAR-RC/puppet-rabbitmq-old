@@ -1,0 +1,7 @@
+Code-Review+2: Sam Morrison <sam.morrison@unimelb.edu.au>
+Verified+1: Jenkins <rc-melbourne@nectar.org.au>
+Submitted-by: Sam Morrison <sam.morrison@unimelb.edu.au>
+Submitted-at: Thu, 07 Mar 2013 13:29:42 +1100
+Reviewed-on: https://review.rc.nectar.org.au/194
+Project: NeCTAR-RC/puppet-rabbitmq
+Branch: refs/heads/production
