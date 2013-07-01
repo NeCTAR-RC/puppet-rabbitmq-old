@@ -1,5 +1,8 @@
 class rabbitmq {
 
+  $rabbit_user = hiera('nagios::rabbit_user','')
+  $rabbit_password = hiera('nagios::rabbit_pass','')
+
   package { 'rabbitmq-server':
     ensure => present,
   }
@@ -40,10 +43,10 @@ class rabbitmq {
   nagios::nrpe::service {
     'rabbitmq_overview':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} -c -1,1,-1 -u ${nagios_rabbit_user} -p ${nagios_rabbit_pass}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} -c -1,1,-1 -u ${rabbit_user} -p ${rabbit_password}";
     'rabbitmq_aliveness':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${fqdn} -u ${nagios_rabbit_user} -p ${nagios_rabbit_pass}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${fqdn} -u ${rabbit_user} -p ${rabbit_password}";
   }
 
   package { ['libnagios-plugin-perl', 'libwww-perl', 'libjson-perl']:
@@ -53,15 +56,15 @@ class rabbitmq {
   file {
     '/usr/local/lib/nagios/plugins/check_rabbitmq_overview':
       ensure  => file,
-      owner   => root,
-      group   => root,
+      owner   => 'root',
+      group   => 'root',
       mode    => '0755',
       source  => 'puppet:///modules/rabbitmq/check_rabbitmq_overview',
       require => File['/usr/local/lib/nagios/plugins'];
     '/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness':
       ensure  => file,
-      owner   => root,
-      group   => root,
+      owner   => 'root',
+      group   => 'root',
       mode    => '0755',
       source  => 'puppet:///modules/rabbitmq/check_rabbitmq_aliveness',
       require => File['/usr/local/lib/nagios/plugins'];
