@@ -1,7 +1,4 @@
-class rabbitmq {
-
-  $rabbit_user = hiera('nagios::rabbit_user','')
-  $rabbit_password = hiera('nagios::rabbit_pass','')
+class rabbitmq($mgmt_port=55672) {
 
   package { 'rabbitmq-server':
     ensure => present,
@@ -40,13 +37,17 @@ class rabbitmq {
     require => Package['rabbitmq-server'],
   }
 
+  $user = hiera('nagios::rabbit_user', 'guest')
+  $password = hiera('nagios::rabbit_pass', 'guest')
+  $vhost = hiera('nagios::rabbit_vhost', '/')
+
   nagios::nrpe::service {
     'rabbitmq_overview':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} -c -1,1,-1 -u ${rabbit_user} -p ${rabbit_password}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} -P ${mgmt_port} -V ${check_vhost} -c -1,1,-1 -u ${user} -p ${password}";
     'rabbitmq_aliveness':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${fqdn} -u ${rabbit_user} -p ${rabbit_password}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${fqdn} -P ${mgmt_port} -V ${vhost} -u ${user} -p ${password}";
   }
 
   package { ['libnagios-plugin-perl', 'libwww-perl', 'libjson-perl']:
