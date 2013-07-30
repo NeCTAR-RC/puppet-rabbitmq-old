@@ -22,5 +22,17 @@ class rabbitmq::cluster($cookie, $nodes) inherits rabbitmq {
     notify  => Service['rabbitmq-server'],
     require => Package['rabbitmq-server'],
   }
+
+  $cluster_hosts = hiera('firewall::rabbit_cluster_hosts', [])
   
+  firewall::multisource {[ prefix($cluster_hosts, '200 rabbitcluster,') ]:
+    action => 'accept',
+    proto  => 'tcp',
+    dport  => '4369',
+  }
+  firewall::multisource {[ prefix($cluster_hosts, '200 rabbitcluster-multi,') ]:
+    action => 'accept',
+    proto  => 'tcp',
+    dport  => '40000-41000',
+  }
 }

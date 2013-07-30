@@ -37,6 +37,20 @@ class rabbitmq($mgmt_port=55672) {
     require => Package['rabbitmq-server'],
   }
 
+  $admin_hosts = hiera('firewall::admin_hosts', [])
+  $infra_hosts = hiera('firewall::infra_hosts', [])
+
+  firewall::multisource {[ prefix($admin_hosts, '200 rabbit mgmt,') ]:
+    action => 'accept',
+    proto  => 'tcp',
+    dport  => $mgmt_port,
+  }
+  firewall::multisource {[ prefix($infra_hosts, '200 rabbit ssl,') ]:
+    action => 'accept',
+    proto  => 'tcp',
+    dport  => 5671,
+  }
+
   $user = hiera('nagios::rabbit_user', 'guest')
   $password = hiera('nagios::rabbit_pass', 'guest')
   $vhost = hiera('nagios::rabbit_vhost', '/')
