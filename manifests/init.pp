@@ -23,7 +23,12 @@ class rabbitmq($mgmt_port=55672) {
   file {'/etc/rabbitmq/rabbitmq.config':
     ensure  => present,
     content => template('rabbitmq/rabbitmq.config.erb'),
-    notify  => Service['rabbitmq-server'],
+    require => Package['rabbitmq-server'],
+  }
+
+  file {'/etc/rabbitmq/rabbitmq-env.conf':
+    ensure  => present,
+    source  => 'puppet:///modules/rabbitmq/rabbitmq-env.conf',
     require => Package['rabbitmq-server'],
   }
 
