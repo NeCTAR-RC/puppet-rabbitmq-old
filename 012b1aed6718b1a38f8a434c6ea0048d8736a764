@@ -1,0 +1,8 @@
+Change-Id: I012b1aed6718b1a38f8a434c6ea0048d8736a764
+Code-Review+2: Russell Sim <russell.sim@gmail.com>
+Verified+1: Russell Sim <russell.sim@gmail.com>
+Submitted-by: Russell Sim <russell.sim@gmail.com>
+Submitted-at: Wed, 16 Oct 2013 09:59:22 +1100
+Reviewed-on: https://review.rc.nectar.org.au/864
+Project: NeCTAR-RC/puppet-rabbitmq
+Branch: refs/meta/config
