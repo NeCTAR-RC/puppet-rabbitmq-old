@@ -63,7 +63,7 @@ class rabbitmq($mgmt_port=55672) {
   nagios::nrpe::service {
     'rabbitmq_overview':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} --port ${mgmt_port} -c 100,20,100 -w 10,1,10 -u ${user} -p ${password}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} --port ${mgmt_port} -c 1000,20,1000 -w 500,1,500 -u ${user} -p ${password}";
     'rabbitmq_aliveness':
       servicegroups => 'message-queues',
       check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${fqdn} --port ${mgmt_port} --vhost ${vhost} -u ${user} -p ${password}";
