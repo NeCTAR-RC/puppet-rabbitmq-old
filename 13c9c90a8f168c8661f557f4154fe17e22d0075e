@@ -1,0 +1,8 @@
+Code-Review+2: Kieran Spear <kispear@gmail.com>
+Code-Review+1: Marcus Furlong <marcus.furlong.unimelb@gmail.com>
+Verified+1: Jenkins <rc-melbourne@nectar.org.au>
+Submitted-by: Kieran Spear <kispear@gmail.com>
+Submitted-at: Thu, 19 Dec 2013 11:30:41 +1100
+Reviewed-on: https://review.rc.nectar.org.au/1063
+Project: NeCTAR-RC/puppet-rabbitmq
+Branch: refs/heads/master
