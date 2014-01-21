@@ -1,4 +1,4 @@
-class rabbitmq($mgmt_port=55672) {
+class rabbitmq($mgmt_port=55672, $max_conns=4096) {
 
   package { 'rabbitmq-server':
     ensure => present,
@@ -13,6 +13,13 @@ class rabbitmq($mgmt_port=55672) {
     ensure  => running,
     enable  => true,
     require => Package['rabbitmq-server'],
+  }
+
+  file { '/etc/default/rabbitmq-server':
+    ensure  => present,
+    content => template('rabbitmq/etc-default-rabbitmq-server.erb'),
+    require => Package['rabbitmq-server'],
+    notify  => Service['rabbitmq-server'],
   }
 
   file {['/etc/rabbitmq/ssl', '/etc/rabbitmq/rabbitmq.conf.d']:
