@@ -15,6 +15,13 @@ class rabbitmq($mgmt_port=55672) {
     require => Package['rabbitmq-server'],
   }
 
+  file { '/etc/default/rabbitmq-server':
+    ensure  => present,
+    source  => 'puppet:///modules/rabbitmq/etc-default-rabbitmq-server',
+    require => Package['rabbitmq-server'],
+    notify  => Service['rabbitmq-server'],
+  }
+
   file {['/etc/rabbitmq/ssl', '/etc/rabbitmq/rabbitmq.conf.d']:
     ensure  => directory,
     require => Package['rabbitmq-server'],
