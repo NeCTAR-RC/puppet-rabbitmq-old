@@ -1,4 +1,8 @@
-class rabbitmq::cluster($cookie, $nodes) inherits rabbitmq {
+class rabbitmq::cluster(
+  $cookie,
+  $nodes,
+  $partition_handling=undef
+) inherits rabbitmq {
 
   File['/etc/rabbitmq/rabbitmq.config'] {
     content => template('rabbitmq/rabbitmq-cluster.config.erb'),
