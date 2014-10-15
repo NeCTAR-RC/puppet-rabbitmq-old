@@ -55,7 +55,7 @@ class rabbitmq($mgmt_port=55672, $max_conns=1024) {
   firewall::multisource {[ prefix($admin_hosts, '200 rabbit mgmt,') ]:
     action => 'accept',
     proto  => 'tcp',
-    dport  => $mgmt_port,
+    dport  => [5671, 5672, $mgmt_port,],
   }
   firewall::multisource {[ prefix($infra_hosts, '200 rabbit ssl,') ]:
     action => 'accept',
