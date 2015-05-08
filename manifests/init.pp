@@ -1,4 +1,10 @@
-class rabbitmq($mgmt_port=55672, $max_conns=1024) {
+# RabbitMQ server
+class rabbitmq(
+  $mgmt_port=55672,
+  $max_conns=1024,
+  $nagios_critical='1000,20,1000',
+  $nagios_warning='500,1,500')
+{
 
   package { 'rabbitmq-server':
     ensure => present,
@@ -70,10 +76,10 @@ class rabbitmq($mgmt_port=55672, $max_conns=1024) {
   nagios::nrpe::service {
     'rabbitmq_overview':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${fqdn} --port ${mgmt_port} -c 1000,20,1000 -w 500,1,500 -u ${user} -p ${password}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${::fqdn} --port ${mgmt_port} -c ${nagios_critical} -w ${nagios_warning} -u ${user} -p ${password}";
     'rabbitmq_aliveness':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${fqdn} --port ${mgmt_port} --vhost ${vhost} -u ${user} -p ${password}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${::fqdn} --port ${mgmt_port} --vhost ${vhost} -u ${user} -p ${password}";
   }
 
   package { ['libnagios-plugin-perl', 'libwww-perl', 'libjson-perl']:
