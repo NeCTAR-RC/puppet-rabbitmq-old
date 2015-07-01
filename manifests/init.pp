@@ -41,6 +41,9 @@ class rabbitmq(
   file {'/etc/rabbitmq/rabbitmq-env.conf':
     ensure  => present,
     source  => 'puppet:///modules/rabbitmq/rabbitmq-env.conf',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
     require => Package['rabbitmq-server'],
   }
 
