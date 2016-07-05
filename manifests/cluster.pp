@@ -6,7 +6,7 @@ class rabbitmq::cluster(
 ) inherits rabbitmq {
 
   File['/etc/rabbitmq/rabbitmq.config'] {
-    content => template('rabbitmq/rabbitmq-cluster.config.erb'),
+    content => template("rabbitmq/rabbitmq-cluster.config-${::lsbdistcodename}.erb"),
   }
 
   file {'/etc/rabbitmq/rabbitmq.conf.d/cluster-ports.conf':
