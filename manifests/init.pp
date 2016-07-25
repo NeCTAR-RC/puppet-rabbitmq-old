@@ -21,10 +21,30 @@ class rabbitmq(
     require => Package['rabbitmq-server'],
   }
 
-  file { '/etc/default/rabbitmq-server':
-    ensure  => present,
-    content => template('rabbitmq/etc-default-rabbitmq-server.erb'),
-    require => Package['rabbitmq-server'],
+  if $::systemd {
+    include ::systemd
+    file { '/etc/systemd/system/rabbitmq-server.service.d':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+    }
+
+    file { '/etc/systemd/system/rabbitmq-server.service.d/limits.conf':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('rabbitmq/rabbitmq-server.service.d-limits.conf.erb'),
+      require => File['/etc/systemd/system/rabbitmq-server.service.d'],
+      notify  => Exec['systemctl-daemon-reload']
+    }
+  }
+  else {
+    file { '/etc/default/rabbitmq-server':
+      ensure  => present,
+      content => template('rabbitmq/etc-default-rabbitmq-server.erb'),
+      require => Package['rabbitmq-server'],
+    }
   }
 
   file {['/etc/rabbitmq/ssl', '/etc/rabbitmq/rabbitmq.conf.d']:
