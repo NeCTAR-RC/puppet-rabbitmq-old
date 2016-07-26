@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_67ab008a",
+        "filename": "manifests/init.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-07-26T06:23:20Z",
+      "side": 1,
+      "message": "maybe also notify \u003d\u003e Service[\u0027rabbitmq-server\u0027] to ensure the service is restarted with the correct ulimit ?",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "647d2a36bf06667509a1e4cf3c0df7056730d129",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_47a604c3",
+        "filename": "manifests/init.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-07-26T06:23:20Z",
+      "side": 1,
+      "message": "should we add this in a else { } (if not $::systemd)",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 3
+      },
+      "revId": "647d2a36bf06667509a1e4cf3c0df7056730d129",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
