@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_0cf5f582",
+        "filename": "files/check_rabbitmq_overview",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000105
+      },
+      "writtenOn": "2016-08-31T07:50:05Z",
+      "side": 1,
+      "message": "Does this get installed on all our nodes into the system python environment?",
+      "revId": "6d2b81673e1add7bcdf1e84d59b24b3a36909c9f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
