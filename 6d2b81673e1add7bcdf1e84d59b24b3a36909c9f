@@ -16,6 +16,75 @@
       "revId": "6d2b81673e1add7bcdf1e84d59b24b3a36909c9f",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_8c366502",
+        "filename": "files/check_rabbitmq_overview",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-09-01T03:57:55Z",
+      "side": 1,
+      "message": "STATE_OK ?",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 13
+      },
+      "revId": "6d2b81673e1add7bcdf1e84d59b24b3a36909c9f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_0c2255b9",
+        "filename": "files/check_rabbitmq_overview",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-09-01T03:57:55Z",
+      "side": 1,
+      "message": "should this use STATE_WARNING when setting state? or;\n\n if messages \u003e warning \u0026\u0026 state \u003c\u003d STATE_OK:\n   state \u003d STATE_WARNING",
+      "range": {
+        "startLine": 71,
+        "startChar": 7,
+        "endLine": 73,
+        "endChar": 25
+      },
+      "revId": "6d2b81673e1add7bcdf1e84d59b24b3a36909c9f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_6c183985",
+        "filename": "files/check_rabbitmq_overview",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-09-01T03:57:55Z",
+      "side": 1,
+      "message": "CRITICAL ?",
+      "range": {
+        "startLine": 81,
+        "startChar": 15,
+        "endLine": 81,
+        "endChar": 20
+      },
+      "revId": "6d2b81673e1add7bcdf1e84d59b24b3a36909c9f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
