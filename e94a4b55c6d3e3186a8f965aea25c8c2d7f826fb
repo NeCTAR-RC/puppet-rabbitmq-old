@@ -1,0 +1,7 @@
+Verified+1: Jenkins <no-reply+jenkins@nectar.org.au>
+Code-Review+2: Andy Botting <andrew.botting@unimelb.edu.au>
+Submitted-by: Andy Botting <andrew.botting@unimelb.edu.au>
+Submitted-at: Fri, 02 Sep 2016 09:46:36 +1000
+Reviewed-on: https://review.rc.nectar.org.au/7725
+Project: NeCTAR-RC/puppet-rabbitmq
+Branch: refs/heads/master
