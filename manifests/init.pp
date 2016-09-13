@@ -66,9 +66,7 @@ class rabbitmq(
     require => Package['rabbitmq-server'],
   }
 
-  File <| tag == 'sslcert' |> {
-    notify +> Service['rabbitmq-server'],
-  }
+  File <| tag == 'sslcert' |>
 
   exec {'/usr/lib/rabbitmq/bin/rabbitmq-plugins enable rabbitmq_management':
     unless      => '/bin/grep rabbitmq_management /etc/rabbitmq/enabled_plugins',
