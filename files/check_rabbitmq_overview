@@ -9,7 +9,7 @@ STATE_WARNING = 1
 STATE_CRITICAL = 2
 STATE_UNKNOWN = 3
 
-BASE_URL = 'http://%s:%d/api/queues'
+BASE_URL = 'http://%s:%d/api/queues/%s'
 
 
 def collect_args():
@@ -37,12 +37,17 @@ def collect_args():
     parser.add_argument('--port', '-P', type=int,
                         required=False, default='15672',
                         help='port (default: 15672)')
+
+    parser.add_argument('--vhost', '-V', type=str,
+                        required=False, default='',
+                        help='vhost (default: None)')
+
     return parser
 
 
 def check_queues(args):
     try:
-        url = BASE_URL % (args.host, args.port)
+        url = BASE_URL % (args.host, args.port, args.vhost)
         resp = requests.get(url, auth=(args.username, args.password))
         resp.raise_for_status()
     except requests.exceptions.HTTPError as e:
@@ -56,7 +61,6 @@ def check_queues(args):
     # Compatibility with old queue check
     warning = int(args.warning.split(',')[0])
     critical = int(args.critical.split(',')[0])
-
     if critical < warning:
         raise Exception('critical threshold must be greater than '
                         'warning threshold')
