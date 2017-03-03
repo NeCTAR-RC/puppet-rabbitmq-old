@@ -21,7 +21,7 @@ class rabbitmq(
     require => Package['rabbitmq-server'],
   }
 
-  if $::systemd {
+  if str2bool($::systemd) {
     include ::systemd
     file { '/etc/systemd/system/rabbitmq-server.service.d':
       ensure => directory,
