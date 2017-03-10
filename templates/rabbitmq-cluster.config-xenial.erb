@@ -1,9 +1,9 @@
 [
   {rabbit, [
      {ssl_listeners, [5671]},
-     {ssl_options, [{cacertfile,"<%= ssl_cacert_path %>"},
-                    {certfile,"<%= ssl_cert_path %>"},
-                    {keyfile,"<%= ssl_key_path %>"},
+     {ssl_options, [{cacertfile,"<%= @ssl_cacert_path %>"},
+                    {certfile,"<%= @ssl_cert_path %>"},
+                    {keyfile,"<%= @ssl_key_path %>"},
                     {verify,verify_peer},
                     {versions, ['tlsv1.2', 'tlsv1.1', tlsv1]},
                     {ciphers, ["ECDHE-ECDSA-AES256-GCM-SHA384","ECDHE-RSA-AES256-GCM-SHA384",
@@ -24,6 +24,6 @@
 <% if @partition_handling -%>
      {cluster_partition_handling, <%= @partition_handling %>},
 <% end -%>
-     {cluster_nodes, {[<%= nodes.map{|n| "'rabbit@" + n + "'"}.join(', ') %>], disc}}
+     {cluster_nodes, {[<%= @nodes.map{|n| "'rabbit@" + n + "'"}.join(', ') %>], disc}}
    ]}
 ].
