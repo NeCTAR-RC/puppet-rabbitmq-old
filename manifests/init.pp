@@ -53,7 +53,7 @@ class rabbitmq(
 
   file {'/etc/rabbitmq/rabbitmq.config':
     ensure  => present,
-    content => template('rabbitmq/rabbitmq.config.erb'),
+    content => template("rabbitmq/rabbitmq.config-${::lsbdistcodename}.erb"),
     require => Package['rabbitmq-server'],
   }
 
