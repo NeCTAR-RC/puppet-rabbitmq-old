@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import argparse
+import re
 import requests
 import sys
 
@@ -42,6 +43,10 @@ def collect_args():
                         required=False, default='',
                         help='vhost (default: None)')
 
+    parser.add_argument('--queue', '-q', type=str, nargs='+',
+                        required=False,
+                        help='only check queues with name matching string')
+
     return parser
 
 
@@ -67,9 +72,17 @@ def check_queues(args):
 
     errors = []
     state = STATE_OK
+
+    # builds regex once
+    if args.queue:
+        queues = re.compile("(?=("+'|'.join(args.queue)+r"))")
+
     for q in queue_status:
         # Ignore temporary queues (e.g. reply, fanout) with expiry
         if q.get('arguments').get('x-expires'):
+            continue
+
+        if args.queue is not None and queues.search(q.get('name')) is None:
             continue
 
         messages = q.get('messages', 0)
