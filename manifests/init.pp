@@ -5,6 +5,7 @@ class rabbitmq(
   $nagios_critical='1000,20,1000',
   $nagios_warning='500,1,500')
 {
+  include ::rabbitmq::nagios_plugins
 
   package { 'rabbitmq-server':
     ensure => present,
@@ -105,20 +106,4 @@ class rabbitmq(
 
   ensure_packages(['libnagios-plugin-perl', 'libwww-perl', 'libjson-perl', 'python-requests'])
 
-  file {
-    '/usr/local/lib/nagios/plugins/check_rabbitmq_overview':
-      ensure  => file,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      source  => 'puppet:///modules/rabbitmq/check_rabbitmq_overview',
-      require => File['/usr/local/lib/nagios/plugins'];
-    '/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness':
-      ensure  => file,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      source  => 'puppet:///modules/rabbitmq/check_rabbitmq_aliveness',
-      require => File['/usr/local/lib/nagios/plugins'];
-  }
 }
