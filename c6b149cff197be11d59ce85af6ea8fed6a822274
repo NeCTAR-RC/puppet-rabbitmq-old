@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ae5cdf2_d6571301",
+        "filename": "files/check_rabbitmq_overview",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2017-07-26T23:11:52Z",
+      "side": 1,
+      "message": "couldn\u0027t this just be\n  if args.queue:\n?",
+      "range": {
+        "startLine": 77,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 29
+      },
+      "revId": "c6b149cff197be11d59ce85af6ea8fed6a822274",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
