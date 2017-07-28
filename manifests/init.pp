@@ -93,6 +93,10 @@ class rabbitmq(
   $user = hiera('nagios::rabbit_user', 'guest')
   $password = hiera('nagios::rabbit_pass', 'guest')
   $vhost = hiera('nagios::rabbit_vhost', '/')
+  $ssl = $mgmt_ssl ? {
+    true  => '--ssl',
+    false => '',
+  }
 
   nagios::nrpe::service {
     'rabbitmq_overview':
@@ -101,7 +105,7 @@ class rabbitmq(
       nrpe_command  => 'check_nrpe_slow_1arg';
     'rabbitmq_aliveness':
       servicegroups => 'message-queues',
-      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${::fqdn} --port ${mgmt_port} --vhost ${vhost} -u ${user} -p ${password}";
+      check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${::fqdn} --port ${mgmt_port} --vhost ${vhost} -u ${user} -p ${password} ${ssl}";
   }
 
   ensure_packages(['libnagios-plugin-perl', 'libwww-perl', 'libjson-perl', 'python-requests'])
