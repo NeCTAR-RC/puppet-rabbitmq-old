@@ -61,6 +61,10 @@ $p->add_arg(spec => 'vhost=s',
     help => "Specify the vhost to test (default: %s)",
     default => "/"
 );
+$p->add_arg(spec => 'ssl',
+    help => "Use SSL to connect (default: %s)",
+);
+
 # Parse arguments and process standard ones (e.g. usage, help, version)
 $p->getopts;
 
@@ -74,8 +78,10 @@ $p->getopts;
 my $hostname=$p->opts->host;
 my $port=$p->opts->port;
 my $vhost=uri_escape($p->opts->vhost);
+my $ssl=$p->opts->ssl;
+my $protocol = $ssl ? 'https' : 'http';
 
-my $url = "http://$hostname:$port/api/aliveness-test/$vhost";
+my $url = "$protocol://$hostname:$port/api/aliveness-test/$vhost";
 
 my $ua = LWP::UserAgent->new(env_proxy=>1);
 $ua->agent($PROGNAME.' ');
