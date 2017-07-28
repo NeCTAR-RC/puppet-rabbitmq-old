@@ -10,9 +10,6 @@ STATE_WARNING = 1
 STATE_CRITICAL = 2
 STATE_UNKNOWN = 3
 
-BASE_URL = 'http://%s:%d/api/queues/%s'
-
-
 def collect_args():
     parser = argparse.ArgumentParser(description='Check RabbitMQ queues')
     parser.add_argument('--username', '-u', type=str,
@@ -47,12 +44,18 @@ def collect_args():
                         required=False,
                         help='only check queues with name matching string')
 
+    parser.add_argument('--ssl', action='store_true',
+                        help='connect with ssl')
+
     return parser
 
 
 def check_queues(args):
+    protocol = 'https' if args.ssl else 'http'
     try:
-        url = BASE_URL % (args.host, args.port, args.vhost)
+        url = '%s://%s:%d/api/queues/%s' % (protocol, args.host, args.port,
+                                            args.vhost)
+
         resp = requests.get(url, auth=(args.username, args.password))
         resp.raise_for_status()
     except requests.exceptions.HTTPError as e:
