@@ -102,7 +102,7 @@ class rabbitmq(
     'rabbitmq_overview':
       servicegroups => 'message-queues',
       check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_overview -H ${::fqdn} --port ${mgmt_port} -c ${nagios_critical} -w ${nagios_warning} -u ${user} -p ${password} ${ssl}",
-      nrpe_command  => 'check_nrpe_slow_1arg';
+      nrpe_command  => 'check_nrpe_really_slow_1arg';
     'rabbitmq_aliveness':
       servicegroups => 'message-queues',
       check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${::fqdn} --port ${mgmt_port} --vhost ${vhost} -u ${user} -p ${password} ${ssl}";
