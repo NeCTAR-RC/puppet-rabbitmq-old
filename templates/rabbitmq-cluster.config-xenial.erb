@@ -1,10 +1,9 @@
 [
   {rabbit, [
      {ssl_listeners, [5671]},
-     {ssl_options, [{cacertfile,"<%= @ssl_cacertbundle_path %>"},
+     {ssl_options, [{cacertfile,"<%= @ssl_cacert_path %>"},
                     {certfile,"<%= @ssl_cert_path %>"},
                     {keyfile,"<%= @ssl_key_path %>"},
-                    {depth, 2},
                     {verify,verify_peer},
                     {versions, ['tlsv1.2', 'tlsv1.1', tlsv1]},
                     {ciphers, ["ECDHE-ECDSA-AES256-GCM-SHA384","ECDHE-RSA-AES256-GCM-SHA384",
@@ -30,7 +29,7 @@
   {rabbitmq_management,
     [{listener, [{port,     15672},
                  {ssl,      true},
-                 {ssl_opts, [{cacertfile,"<%= @ssl_cacertbundle_path %>"},
+                 {ssl_opts, [{cacertfile,"<%= @ssl_cacert_path %>"},
                              {certfile,"<%= @ssl_cert_path %>"},
                              {keyfile,"<%= @ssl_key_path %>"}
                  ]}
