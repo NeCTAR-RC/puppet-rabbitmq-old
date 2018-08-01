@@ -32,7 +32,7 @@ class rabbitmq::cluster(
   nectar::firewall::multisource {[ prefix($cluster_hosts, '200 rabbitcluster,') ]:
     action => 'accept',
     proto  => 'tcp',
-    dport  => '4369',
+    dport  => ['4369', '25672'],
   }
   nectar::firewall::multisource {[ prefix($cluster_hosts, '200 rabbitcluster-multi,') ]:
     action => 'accept',
