@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4dbf86c9_12b3c7eb",
+        "filename": "manifests/cluster.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-08-02T23:32:02Z",
+      "side": 1,
+      "message": "won\u0027t this mean duplicate resources if same as above? Can add multiple ports to the dport option?",
+      "range": {
+        "startLine": 37,
+        "startChar": 59,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "509303103beff59988f2233fa286de837c162d78",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
