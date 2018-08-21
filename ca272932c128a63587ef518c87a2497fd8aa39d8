@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbf0e5ed_c60eb403",
+        "filename": "manifests/init.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-08-21T06:01:54Z",
+      "side": 1,
+      "message": "the comment is confusing and I also think maybe this should be a if os in [\u0027precise\u0027, \u0027trusty\u0027, \u0027xenial\u0027] instead",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 115,
+        "endChar": 3
+      },
+      "revId": "ca272932c128a63587ef518c87a2497fd8aa39d8",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
