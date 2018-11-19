@@ -84,12 +84,11 @@ class rabbitmq(
     proto  => 'tcp',
     dport  => [5671, 5672, $mgmt_port,],
   }
-  nectar::firewall::multisource {[ prefix($infra_hosts, '200 rabbit ssl,') ]:
+  nectar::firewall::multisource {[ prefix($infra_hosts, '200 rabbit ssl non-ssl,') ]:
     action => 'accept',
     proto  => 'tcp',
-    dport  => 5671,
+    dport  => [5671, 5672], 
   }
-
   $user = hiera('nagios::rabbit_user', 'guest')
   $password = hiera('nagios::rabbit_pass', 'guest')
   $vhost = hiera('nagios::rabbit_vhost', '/')
