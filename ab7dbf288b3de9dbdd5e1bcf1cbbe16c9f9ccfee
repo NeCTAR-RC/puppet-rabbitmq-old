@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c58c3b8_a0c93a7c",
+        "filename": "manifests/init.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-11-19T01:02:27Z",
+      "side": 1,
+      "message": "Better to just combine these together which leads in 1 iptables rule per host with multiple ports as opposed to 2 per host",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 3
+      },
+      "revId": "ab7dbf288b3de9dbdd5e1bcf1cbbe16c9f9ccfee",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
