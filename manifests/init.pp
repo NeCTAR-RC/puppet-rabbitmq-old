@@ -5,7 +5,8 @@ class rabbitmq(
   $mgmt_ssl=false,
   $max_conns=1024,
   $nagios_critical='1000,20,1000',
-  $nagios_warning='500,1,500')
+  $nagios_warning='500,1,500',
+  $insecure_ssl=true)
 {
 
   if $manage_repo {
