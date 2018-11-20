@@ -1,11 +1,17 @@
 # RabbitMQ server
 class rabbitmq(
+  $manage_repo=false,
   $mgmt_port=15672,
   $mgmt_ssl=false,
   $max_conns=1024,
   $nagios_critical='1000,20,1000',
   $nagios_warning='500,1,500')
 {
+
+  if $manage_repo {
+    include ::rabbitmq::repo
+    Apt::Source <| title == 'rabbitmq' |> -> Class['apt::update'] -> Package <| tag == 'rabbitmq' |>
+  }
 
   package { 'rabbitmq-server':
     ensure => present,
