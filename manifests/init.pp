@@ -11,6 +11,8 @@ class rabbitmq(
     ensure => present,
   }
 
+  Apt::Source <| title == 'nectar' |> -> Class['apt::update'] -> Package <| tag == 'rabbitmq' |>
+
   user { 'rabbitmq':
     groups  => $::ssl_group,
     require => Package['rabbitmq-server'],
