@@ -115,10 +115,7 @@ class rabbitmq(
       check_command => "/usr/local/lib/nagios/plugins/check_rabbitmq_aliveness -H ${::fqdn} --port ${mgmt_port} --vhost ${vhost} -u ${user} -p ${password} ${ssl}";
   }
 
-  ensure_packages(['libwww-perl', 'libjson-perl', 'python-requests'])
-  if $::lsbdistcodename in ['precise','trusty','xenial'] {
-    ensure_packages(['libnagios-plugin-perl'])
-  }
+  ensure_packages(['libmonitoring-plugin-perl', 'libwww-perl', 'libjson-perl', 'python-requests'])
 
   file {
     '/usr/local/lib/nagios/plugins/check_rabbitmq_overview':
