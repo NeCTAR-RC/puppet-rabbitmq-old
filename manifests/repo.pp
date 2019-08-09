@@ -1,5 +1,7 @@
 # Installs rabbitmq repo
-class rabbitmq::repo {
+class rabbitmq::repo(
+  $erlang_version = '20',
+){
 
   if $::http_proxy and str2bool($::rfc1918_gateway) {
     $key_options = "http-proxy=${::http_proxy}"
@@ -17,6 +19,6 @@ class rabbitmq::repo {
     comment  => 'Erlang',
     location => 'http://dl.bintray.com/rabbitmq/debian',
     release  => $::lsbdistcodename,
-    repos    => 'erlang-20.x rabbitmq-server'
+    repos    => "erlang-${erlang_version}.x rabbitmq-server"
   }
 }
