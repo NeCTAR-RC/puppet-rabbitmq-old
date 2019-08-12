@@ -9,6 +9,10 @@ class rabbitmq::repo(
     $key_options = undef
   }
 
+  package { 'apt-transport-https':
+    ensure => present,
+  }
+
   apt::key { 'rabbitmq':
     id      => '0A9AF2115F4687BD29803A206B73A36E6026DFCA',
     server  => 'keyserver.ubuntu.com',
@@ -16,9 +20,16 @@ class rabbitmq::repo(
   }
 
   apt::source {'rabbitmq':
-    comment  => 'Erlang',
-    location => 'http://dl.bintray.com/rabbitmq/debian',
+    comment  => 'RabbitMQ',
+    location => 'https://dl.bintray.com/rabbitmq/debian',
     release  => $::lsbdistcodename,
-    repos    => "erlang-${erlang_version}.x rabbitmq-server"
+    repos    => 'main'
+  }
+
+  apt::source {'rabbitmq-erlang':
+    comment  => 'Erlang',
+    location => 'https://dl.bintray.com/rabbitmq-erlang/debian',
+    release  => $::lsbdistcodename,
+    repos    => "erlang-${erlang_version}.x"
   }
 }
