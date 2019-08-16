@@ -12,7 +12,7 @@
      {cluster_nodes, {[<%= @nodes.map{|n| "'rabbit@" + n + "'"}.join(', ') %>], disc}}
   ]}<% if @mgmt_ssl %>,
   {rabbitmq_management,
-    [{listener, [{port,     15672},
+    [{listener, [{port,     <%= @mgmt_port %>},
                  {ssl,      true},
                  {ssl_opts, [{cacertfile,"<%= @ssl_cacert_path %>"},
                              {certfile,"<%= @ssl_cert_path %>"},
