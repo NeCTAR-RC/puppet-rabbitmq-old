@@ -15,6 +15,9 @@ class rabbitmq(
   nag::moved_variable{'rabbitmq::insecure_ssl':
     new_location => 'profile::core::rabbitmq::admin_ssl_noverify',
   }
+  $new_insecure = hiera('profile::core::rabbitmq::admin_ssl_noverify', undef)
+  $old_insecure = hiera('rabbitmq::insecure_ssl', undef)
+  $insecure_ssl = pick($new_insecure, $old_insecure)
 
   if $manage_repo {
     include ::rabbitmq::repo
